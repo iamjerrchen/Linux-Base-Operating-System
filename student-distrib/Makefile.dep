@@ -1,0 +1,35 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+wrapper.o: wrapper.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+exceptions.o: exceptions.c exceptions.h lib.h types.h syscall.h paging.h \
+  x86_desc.h fd_table.h
+fd_table.o: fd_table.c fd_table.h lib.h types.h syscall.h paging.h \
+  x86_desc.h exceptions.h keyboard.h i8259.h idt.h rtc.h wrapper.h \
+  testcases3_2.h filesystem.h terminal.h
+filesystem.o: filesystem.c filesystem.h lib.h types.h syscall.h paging.h \
+  x86_desc.h fd_table.h exceptions.h terminal.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt.o: idt.c idt.h x86_desc.h types.h exceptions.h lib.h rtc.h i8259.h \
+  keyboard.h testcases3_2.h filesystem.h syscall.h paging.h fd_table.h \
+  terminal.h wrapper.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h syscall.h \
+  paging.h fd_table.h exceptions.h rtc.h idt.h keyboard.h testcases3_2.h \
+  filesystem.h terminal.h wrapper.h sched.h debug.h
+keyboard.o: keyboard.c keyboard.h i8259.h types.h lib.h idt.h x86_desc.h \
+  exceptions.h rtc.h wrapper.h testcases3_2.h filesystem.h syscall.h \
+  paging.h fd_table.h terminal.h
+lib.o: lib.c lib.h types.h
+paging.o: paging.c paging.h lib.h types.h
+rtc.o: rtc.c rtc.h i8259.h types.h lib.h idt.h x86_desc.h exceptions.h \
+  keyboard.h testcases3_2.h filesystem.h syscall.h paging.h fd_table.h \
+  terminal.h wrapper.h
+sched.o: sched.c i8259.h types.h sched.h lib.h syscall.h paging.h \
+  x86_desc.h fd_table.h exceptions.h filesystem.h terminal.h idt.h rtc.h \
+  keyboard.h testcases3_2.h wrapper.h
+syscall.o: syscall.c syscall.h lib.h types.h paging.h x86_desc.h \
+  fd_table.h exceptions.h wrapper.h filesystem.h terminal.h
+terminal.o: terminal.c terminal.h lib.h types.h filesystem.h syscall.h \
+  paging.h x86_desc.h fd_table.h exceptions.h
+testcases3_2.o: testcases3_2.c testcases3_2.h lib.h types.h filesystem.h \
+  syscall.h paging.h x86_desc.h fd_table.h exceptions.h rtc.h i8259.h \
+  idt.h keyboard.h wrapper.h terminal.h
